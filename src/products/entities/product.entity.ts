@@ -12,9 +12,9 @@ export class Product {
   brand: string;
 
   @Column('int',{default:0})
-  stock: string;
+  stock: number;
 
   @Column('numeric',{default:0})
-  price: string;
+  price: number;
 
 }
