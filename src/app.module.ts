@@ -4,6 +4,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ProductsModule } from './products/products.module';
 import { AuthModule } from './auth/auth.module';
 import * as process from "node:process";
+import { PrismaModule } from './prisma/prisma.module';
 
 
 @Module({
@@ -20,6 +21,7 @@ import * as process from "node:process";
       autoLoadEntities: true,
       synchronize: true,
     }),
+    PrismaModule,
     ProductsModule,
     AuthModule
   ],

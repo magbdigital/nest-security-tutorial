@@ -8,15 +8,15 @@ import * as bcrypt from 'bcrypt';
 import { User } from './entities/user.entity';
 import { LoginUserDto, CreateUserDto } from './dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
-
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class AuthService {
 
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-
+   // @InjectRepository(User)
+   // private readonly userRepository: Repository<User>,
+    private  prisma: PrismaService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -27,14 +27,15 @@ export class AuthService {
 
       const { password, ...userData } = createUserDto;
 
-      const user = this.userRepository.create({
+      const user = { id:''};
+        /*this.prisma.user.create({
         ...userData,
         password: bcrypt.hashSync( password, 10 )
       });
 
       await this.userRepository.save( user )
       delete user.password;
-
+*/
       return {
         ...user,
         token: this.getJwtToken({ id: user.id })
@@ -46,7 +47,7 @@ export class AuthService {
     }
 
   }
-
+/*
   async login( loginUserDto: LoginUserDto ) {
 
     const { password, email } = loginUserDto;
@@ -77,7 +78,7 @@ export class AuthService {
 
   }
 
-
+*/
 
   private getJwtToken( payload: JwtPayload ) {
 
