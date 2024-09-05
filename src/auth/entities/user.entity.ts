@@ -1,19 +1,33 @@
-import { Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('users')
 export class User {
 
   @PrimaryGeneratedColumn('uuid')
-  id: String;
+  id: string;
 
-  email: String;
+  @Column('text', {
+    unique: true
+  })
+  email: string;
 
-  password: String;
+  @Column('text', {
+    select: false
+  })
+  password: string;
 
-  fullName: String;
+  @Column('text')
+  fullName: string;
 
-  isActive: Boolean;
+  @Column('bool', {
+    default: true
+  })
+  isActive: boolean;
 
+  @Column('text', {
+    array: true,
+    default: ['user']
+  })
   roles: string[];
 
 }
