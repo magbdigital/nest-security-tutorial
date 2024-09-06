@@ -17,9 +17,9 @@ datasource db {
 model User {
   id        String   @id @default(uuid()) // Equivalente a PrimaryGeneratedColumn('uuid')
   email     String   @unique // Equivalente a unique: true
-  password  String   @map("password") // El equivalente de select: false no existe en Prisma
-  fullname  String
-  isActive  Boolean  @default(true) // Equivalente a default: true
+  password  String    // El equivalente de select: false no existe en Prisma
+  fullName  String @map("full_name")
+  isActive  Boolean? @default(true) @map("is_active")
   roles     String[] @default(["user"]) // Equivalente a array: true y default: ['user']
 
   @@map("users") // Para mapear a la tabla "users" en lugar de "User"
