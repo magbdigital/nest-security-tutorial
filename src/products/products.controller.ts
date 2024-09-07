@@ -12,7 +12,7 @@ export class ProductsController {
   @Post()
   @Auth( ValidRoles.admin )
   create(@Body() createProductDto: CreateProductDto) {
-        //return this.productsService.create(createProductDto);
+        return this.productsService.create(createProductDto);
   }
 
   @Get()

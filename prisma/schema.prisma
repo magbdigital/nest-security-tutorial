@@ -24,3 +24,13 @@ model User {
 
   @@map("users") // Para mapear a la tabla "users" en lugar de "User"
 }
+
+model Product {
+  id          String   @id @default(uuid()) // Mapea el UUID con un valor por defecto generado
+  description String   @db.VarChar(250)     // Limita la longitud a 250 caracteres
+  brand       String?  @db.VarChar(250)     // Campo opcional (puede ser nulo)
+  stock       Int?                             // Campo opcional (puede ser nulo)
+  price       Decimal  @db.Decimal(7, 2)     // Define la columna como decimal con precisión 7,2
+
+  @@map("product")                           // Mapea el modelo a la tabla "product"
+}

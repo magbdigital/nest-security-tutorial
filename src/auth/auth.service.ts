@@ -21,15 +21,14 @@ export class AuthService {
 
       const { password, ...userData } = createUserDto;
 
-      const user = this.prisma.user.create({data: {...userData,
+      const user = await this.prisma.user.create({data: {...userData,
         password: bcrypt.hashSync( password, 10 )}
       });
 
-      return user;
-      /*return {
+      return {
         ...user,
         token: this.getJwtToken({ id: user.id })
-      };*/
+      };
       // TODO: Retornar el JWT de acceso
 
     } catch (error) {
@@ -37,12 +36,12 @@ export class AuthService {
     }
 
   }
-/*
+
   async login( loginUserDto: LoginUserDto ) {
 
     const { password, email } = loginUserDto;
 
-    const user = await this.userRepository.findOne({
+    const user = await this.prisma.user.findUnique({
       where: { email },
       select: { email: true, password: true, id: true } //! OJO!
     });
@@ -58,7 +57,7 @@ export class AuthService {
       token: this.getJwtToken({ id: user.id })
     };
   }
-
+/*
   async checkAuthStatus( user: User ){
 
     return {

@@ -1,19 +1,18 @@
 import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 
 import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class ProductsService {
 
   constructor(
-
+    private  prisma: PrismaService,
   ) {}
-/*
+
   async create(createProductDto: CreateProductDto) {
     try {
-      const product = this.productRepository.create(createProductDto);
-      await this.productRepository.save( product );
+      const product = await this.prisma.product.create({data:createProductDto});
 
       return product;
     } catch (error) {
@@ -21,7 +20,7 @@ export class ProductsService {
     }
 
   }
-
+/*
   findAll() {
     return this.productRepository.find({});
   }
